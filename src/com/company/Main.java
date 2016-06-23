@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
@@ -133,6 +134,27 @@ public class Main {
 // should be "Hungary". In all other cases the function should print out "Unknown". Please try to use a switch statement
 // and make sure the function works with a user's input of lower and upper case strings.
     static void getCountry(String cd) {
+        //get user input
+        switch (cd.toLowerCase()){
+            case "us":
+                System.out.println("United States");
+                break;
+            case "de":
+                System.out.println("Germany");
+                break;
+            case "hu":
+                System.out.println("Hungary");
+                break;
+            default:
+                System.out.println("Unknown");
+        }
+    }
+    static void getCountryFromInput() {
+        //get user input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a country domain: ");
+        String cd = sc.nextLine();
+
         switch (cd.toLowerCase()){
             case "us":
                 System.out.println("United States");
@@ -151,8 +173,32 @@ public class Main {
 //10. Write a function that asks the user to type in a letter and prints out whether the letter is a vowel or a consonant.
 //    You may use control flow and multiple conditionals.
     static void getTypeOfLetter (char letter) {
-//        65 - 90 && 97 - 122
-        //if (letter < 65 || letter > 122 || (letter < 97 && letter > 90)
+        if(Character.isLetter(letter)) {
+            letter = Character.toLowerCase(letter);
+            switch (letter) {
+                case 'a':
+                case 'e':
+                case 'i':
+                case 'o':
+                case 'u':
+                    System.out.println("Character is a vowel.");
+                    break;
+                default:
+                    System.out.println("Character is a consonant.");
+
+            }
+        }
+        else {
+            System.out.println("Character is not a letter.");
+        }
+    }
+
+    static void getTypeOfLetterFromInput () {
+        //get user input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a letter: ");
+        String str = sc.nextLine();
+        char letter = str.charAt(0);
         if(Character.isLetter(letter)) {
             letter = Character.toLowerCase(letter);
             switch (letter) {
@@ -260,5 +306,32 @@ public class Main {
         System.out.print("getTypeOfLetter(\'%\') = ");
         getTypeOfLetter('%');
         System.out.println("\n---------------------");
+
+
+        // 9 and 10 from input
+        String input = "";
+        String choice = "";
+
+        do {
+            System.out.println("\n\nTesting options: \n1 - Country Domain\n2 - Vowel or Consonant\n3 - Q (to quit)");
+            System.out.print("Enter choice: ");
+            Scanner sc = new Scanner(System.in);
+            choice = sc.nextLine();
+            if (choice.equals("1")) {
+                getCountryFromInput();
+            }
+            else if (choice.equals("2")) {
+                getTypeOfLetterFromInput();
+            }
+            else if (choice.equals("q")) {
+                System.out.println("Ending program....");
+            }
+            else {
+                System.out.println("Unrecognized choice.");
+            }
+
+        } while(!choice.equals("q"));
     }
+
+
 }
